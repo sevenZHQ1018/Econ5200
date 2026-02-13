@@ -1,75 +1,151 @@
-# Econ5200
-content = """
-# 审计02：解构统计谎言
+# Audit 02: Deconstructing Statistical Illusions
 
-## 一、问题背景
+## Overview
 
-在加密市场中，平台常展示“成功案例”。
-但 98% 以上项目失败。
+This audit investigates three major statistical distortions commonly found in financial and crypto markets:
 
-如果只分析“已上市币”，我们将得到严重扭曲的结论。
+1. **Survivorship Bias**
+2. **Delay Bias (Look-Ahead / Reporting Lag Bias)**
+3. **False Positives (Multiple Testing Problem)**
 
----
-
-## 二、生存偏见（Survivorship Bias）
-
-只统计存活者 → 平均收益虚高
-
-真实市场结构：
-- 99% 接近归零
-- 1% 拉高均值
-
-后果：
-- 错误认知风险
-- VC回测失真
-- 散户误判成功概率
+Modern financial narratives often rely on incomplete datasets, creating misleading conclusions. This document decomposes these statistical illusions and explains why many market “success stories” are artifacts of biased sampling.
 
 ---
 
-## 三、延迟偏差（Look-ahead Bias）
+## 1. Survivorship Bias
 
-在回测中使用未来信息。
+### Definition
+Survivorship bias occurs when failed entities are excluded from analysis, leaving only successful survivors in the dataset.
 
-例如：
-- 只回测“后来成为明星币”的项目
-- 用未来市值筛选历史数据
+### Example: Memecoin Markets
 
-结果：
-- 回测收益虚假
-- 策略不可复现
+On platforms such as Pump.fun:
+- ~98%+ of tokens fail
+- Only a small fraction survive long enough to appear in aggregated statistics
+
+If we analyze only "listed" or "top-performing" coins, we are:
+- Ignoring the majority of failed tokens
+- Overestimating average returns
+- Underestimating true risk
+
+### Mathematical Illustration
+
+Let:
+
+- Total tokens = 10,000  
+- Survivors = 1%  
+- Failures = 99%  
+
+If failures → value ≈ 0  
+If survivors → heavy-tailed distribution  
+
+Observed average (survivors only) ≠ True market average.
+
+This produces inflated return expectations.
 
 ---
 
-## 四、假阳性（False Positives）
+## 2. Delay Bias (Look-Ahead Bias / Reporting Bias)
 
-在大量随机项目中：
+### Definition
+Delay bias occurs when performance is evaluated after filtering out entities that did not survive long enough to report results.
 
-即便没有alpha，
-也会出现“看起来成功”的币。
+### Mechanism
 
-统计本质：
-- 多重检验问题
-- 噪声中必然产生极端值
+In volatile markets:
+
+- Projects that collapse early disappear from datasets
+- Only projects with delayed collapse remain visible
+- Historical analysis becomes biased toward longer-lived assets
+
+### Impact
+
+This causes:
+
+- Overestimation of long-term stability
+- Underestimation of default probability
+- Illusion of “improving quality” over time
 
 ---
 
-## 五、机制总结
+## 3. False Positives (Multiple Testing Problem)
 
-幂律分布 + 幸存筛选 + 信息泄露
-= 统计幻觉
+### Definition
+
+False positives arise when many strategies are tested simultaneously, increasing the probability that at least one appears statistically significant purely by chance.
+
+### Example
+
+If 1,000 trading strategies are tested with significance level α = 0.05:
+
+Expected false positives:
+
+    1000 × 0.05 = 50
+
+Even in completely random data, ~50 strategies will appear profitable.
+
+### Consequence
+
+- “Winning strategy” reports may simply reflect randomness.
+- Data mining without correction (e.g., Bonferroni, FDR) inflates false discoveries.
 
 ---
 
-## 六、结论
+## Combined Effect in Crypto Markets
 
-如果你只看成功故事，
-你就会系统性高估成功概率。
+When survivorship bias, delay bias, and false positives interact:
 
-真实市场结构不是金字塔，
-而是墓地 + 少数奇迹。
-"""
+1. Thousands of tokens are launched.
+2. Most fail quickly and disappear.
+3. Analysts study only survivors.
+4. Multiple patterns are tested until something “works.”
+5. Media highlights the rare winners.
 
-with open("README.md", "w", encoding="utf-8") as f:
-    f.write(content)
+This produces a powerful statistical illusion of opportunity.
 
-print("README.md 已生成")
+---
+
+## Key Insight
+
+Markets with:
+- Heavy-tailed distributions
+- High failure rates
+- High experimentation volume
+
+Are particularly vulnerable to statistical misinterpretation.
+
+Memecoin ecosystems are a textbook example.
+
+---
+
+## Practical Safeguards
+
+To avoid statistical illusion:
+
+- Include delisted / failed assets in datasets
+- Use out-of-sample validation
+- Apply multiple-testing corrections
+- Report full distribution, not only top performers
+- Simulate null models for comparison
+
+---
+
+## Conclusion
+
+Statistical narratives in speculative markets often overstate opportunity due to structural biases in data selection and hypothesis testing.
+
+Understanding these biases is essential for:
+
+- Quantitative research
+- Risk management
+- Policy analysis
+- Investor education
+
+The illusion is not in the data itself —  
+it is in what the data omits.
+
+---
+
+**Author:** AI-Assisted Statistical Audit  
+**Audit ID:** 02  
+**Topic:** Deconstructing Statistical Illusions  
