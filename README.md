@@ -9,3 +9,4 @@ Did New Jersey's April 1992 minimum wage increase from $4.25 to $5.05 per hour c
 Difference-in-Differences (DiD). By comparing the change in employment in New Jersey (treatment) to the change in Pennsylvania (control) before and after the policy, the DiD estimator isolates the causal effect of the minimum wage increase from any common time trends affecting both states.
 #Data Source
 Card & Krueger (1994) NJ Minimum Wage Dataset, downloaded from David Card's Berkeley Data Archive (https://davidcard.berkeley.edu/data_sets).
+The raw data file (public.dat) is not included in this repository due to file size. It is automatically downloaded from David Card's Berkeley Data Archive when running the notebooks.
