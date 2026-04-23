@@ -17,8 +17,8 @@ st.subheader("ECON 5200 Consulting Report | Double Machine Learning")
 st.markdown("---")
 
 # Pre-computed DML results
-baseline_ate = 5.1315   # DML estimate
-baseline_se  = 0.3895   # standard error
+baseline_ate = -1.2822
+baseline_se  =  0.3652
 
 # ── Sidebar Controls ────────────────────────────────────────
 st.sidebar.header("⚙️ What-If Scenario Controls")
