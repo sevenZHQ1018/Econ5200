@@ -100,7 +100,7 @@ delta_double = np.log(2)
 cf_ate = baseline_ate * delta_double
 cf_se  = abs(baseline_se * delta_double)
 cf_lo  = cf_ate - z * cf_se
-cf_hi  = cf_ate + z * cf_hi
+cf_hi  = cf_ate + z * cf_se
 st.error(
     f"If minimum wage doubled, teen employment is estimated to change by "
     f"**{cf_ate:+.3f} percentage points** "
